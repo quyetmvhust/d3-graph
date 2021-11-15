@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+
+<!-- Based on GPLv3-licensed code at https://bl.ocks.org/mbostock/4063550
+  Modified by Andrew Su on 2016-05-23 -->
+
+
+<meta charset="utf-8">
+<link type="text/css" href="assets/css/tree_colors.css" rel="stylesheet" />
+<style>
+	/* color scheme based on https://color.adobe.com/Adobe-Ideas-Theme-color-theme-3630806/?showPublished=true */
+
+	.node.level1 circle {
+		r: 50px !important;
+		fill: #fff !important;
+		filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, .2));
+
+	}
+
+	.node.level1 .logo-inner {
+		stroke: #208AFF;
+		stroke-width: 3px;
+		r: 40px !important;
+		fill: #fff !important;
+
+		filter: none;
+
+	}
+
+	.node.level1 {
+		position: relative;
+	}
+
+	.node.level1 .logo {
+		display: block;
+		position: absolute;
+		top: 0px;
+		border: 1px solid #208AFF;
+		padding: 10px;
+		transform: translate(-24px, -24px);
+		left: 0px;
+	}
+
+	.node {
+		font: 0px sans-serif;
+		stroke-width: 3px;
+	}
+
+	.node.level1 {
+		font: 40px sans-serif;
+		opacity: 1.0
+	}
+
+	.node.level2 {
+		font: 0px sans-serif;
+	}
+
+	.node.level3 {
+		font: 0px sans-serif;
+	}
+
+	.link {
+		fill: none;
+		stroke-width: 1.5px;
+	}
+
+	#toolbar {
+		display: flex;
+		display: -webkit-box;
+		display: moz-box-flex;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		flex-wrap: wrap;
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		font-family: Roboto, Helvetica, sans-serif;
+		box-shadow: 1px 1px 3px;
+		background-color: #ECEFF1;
+	}
+
+	.tool {
+		display: flex;
+		flex-direction: column;
+		border: solid black 1px;
+		padding: 1px;
+	}
+
+	.tlabel {
+		text-align: center;
+		padding: 3px 2px 1px 2px;
+	}
+
+	.tbuttons {
+		display: flex;
+		display: -webkit-box;
+		display: moz-box-flex;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+
+	.button {
+		border: outset gray 2px;
+		border-radius: 4px;
+		cursor: pointer;
+		padding: 1px 3px;
+		min-width: 12px;
+		text-align: center;
+		margin: 2px;
+		font-family: "Courier New", Courier, monospace;
+		background-color: white;
+	}
+
+	.button:hover {
+		background-color: yellow;
+	}
+
+	.button:active {
+		border: inset gray 2px;
+	}
+
+	#selection {
+		margin: 2px 5px;
+		vertical-align: middle;
+		font-family: "Courier New", Courier, monospace;
+		color: black;
+		background-color: white;
+	}
+
+	#selection span.nodepath:hover {
+		background-color: rgba(0, 0, 25, 0.1);
+		cursor: pointer;
+	}
+
+	#selection span.nodepath.highlight {
+		font-weight: bold;
+	}
+
+	#contextmenu {
+		display: none;
+		position: absolute;
+		border: solid black 1px;
+		box-shadow: 2px 2px 3px gray;
+		padding: 2px;
+		background-color: white;
+		font-family: Roboto, Helvetica, sans-serif;
+		font-size: 0.9em;
+	}
+
+	#contextmenu div {
+		padding: 4px 10px;
+		cursor: pointer;
+	}
+
+	#contextmenu div:hover {
+		background-color: rgba(0, 0, 25, 0.1);
+	}
+
+	#contextmenu span.expcol {
+		pointer-events: none;
+	}
+
+	#help {
+		position: relative;
+		bottom: -1.8em;
+		transform: rotate(270deg);
+		-webkit-transform: rotate(270deg);
+		-moz-transform: rotate(270deg);
+		-o-transform: rotate(270deg);
+		width: 1.2em;
+	}
+
+	#help a {
+		color: black;
+		text-decoration: none;
+		background-color: white;
+	}
+
+	#help:hover a {
+		background-color: yellow;
+	}
+	.node:hover,
+    .node--source,
+    .node--target {
+        font-weight: 700;
+    }
+
+    .node--source {
+        fill: #2ca02c;
+    }
+
+    .node--target {
+        fill: #d62728;
+    }
+
+    .link--source,
+    .link--target {
+        stroke-opacity: 1;
+        stroke-width: 2px;
+    }
+
+    .link--source {
+        stroke: #d62728;
+    }
+
+    .link--target {
+        stroke: #2ca02c;
+    }
+	.tooltip {
+		position: absolute;
+		text-align: left;
+		height: 28px;
+		padding: 2px;
+		font: 12px sans-serif;
+		background: #fff;
+		border: 1px solid #dcdcdc;
+		border-radius: 4px;
+		padding: 5px 10px;
+		pointer-events: none;
+	}
+
+	.tooltip .name {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 5px;
+
+	}
+
+	#tree-container,
+	svg {
+		overflow: hidden;
+	}
+
+	.node {
+		cursor: pointer;
+	}
+
+	.node circle {
+		fill: #fff;
+	}
+
+	.node text {
+		font-size: 12px;
+		font-family: Roboto, sans-serif;
+		text-shadow: 4px 4px 3px white, -4px -4px 3px white;
+	}
+
+	.node text:hover {
+		font-size: 1.2em;
+		transition: font-size 0.1s;
+	}
+
+	.node text:not(:hover) {
+		transition: font-size 1s;
+		transition-delay: 0.5s;
+	}
+
+	.link {
+		fill: none;
+		stroke: #ccc;
+		stroke-width: 1.5px;
+	}
+</style>
+
+<body>
+	<div id="tree-container">
+
+	</div>
+	<div id="toolbar">
+		<div class="tool">
+			<div id="help" title="click for help"><a href="help.html" target="_blank">HELP</a></div>
+		</div>
+		<div class="tool">
+			<div class="tlabel">zoom</div>
+			<div class="tbuttons">
+				<div class="button" data-key="187" title="Zoom In (+ OR scrollwheel)">+</div>
+				<div class="button" data-key="189" title="Zoom Out (&minus; OR scrollwheel)">&minus;</div>
+			</div>
+		</div>
+		<div class="tool">
+			<div class="tlabel">rotate</div>
+			<div class="tbuttons">
+				<div class="button" data-key="33" title="Rotate CCW (Page Up OR &#8679;scrollwheel)"
+					style="font-size:0.9em">&#8634;</div>
+				<div class="button" data-key="34" title="Rotate CW (Page Down OR &#8679;scrollwheel)"
+					style="font-size:0.9em">&#8635;</div>
+			</div>
+		</div>
+		<div class="tool">
+			<div class="tlabel">select</div>
+			<div class="tbuttons">
+				<div class="button" data-key="-38" title="Select Previous (&#8679;&uarr;)" style="font-size:0.9em">
+					&#8613;
+				</div>
+				<div class="button" data-key="-40" title="Select Next (&#8679;&darr;)" style="font-size:0.9em">&#8615;
+				</div>
+			</div>
+		</div>
+		<div class="tool">
+			<div class="tlabel">view</div>
+			<div class="tbuttons">
+				<div class="button" data-key="36" title="Center Root (Home)">&#8962;</div>
+				<div class="button" data-key="35" title="Center Selected (End)" style="font-size:0.8em">&#9673;</div>
+			</div>
+		</div>
+		<div class="tool">
+			<div class="tlabel">toggle</div>
+			<div class="tbuttons">
+				<div class="button" data-key="32" title="Toggle Node (Space OR double-click)">1</div>
+				<div class="button" data-key="13" title="Toggle Level (Return OR &#8679;double-click)">&oplus;</div>
+				<div class="button" data-key="191" title="Toggle Root (/)">/</div>
+			</div>
+		</div>
+		<div class="tool">
+			<div class="tlabel" style="text-align:left" title="Change Root">&nbsp;selection</div>
+			<div id="selection" class="tlabel"></div>
+		</div>
+	</div>
+
+	<div id="contextmenu">
+		<div data-key="191">Xem chi tiết</div>
+		<div data-key="32"><span class="expcol">Expand</span> Node</div>
+		<div data-key="13">Expand 1 Level</div>
+		<div data-key="-13">Expand Full Tree</div>
+		<div data-key="35">Center This Node</div>
+		<div data-key="36">Center Root</div>
+	</div>
+	<script src="assets/d3/d3.min.js"></script>
+	<script src="assets/d3/d3-queue.js"></script>
+	<script src="assets/d3/d3.geo.projection.min.js"></script>
+	<script src="assets/d3/colorbrewer.js"></script>
+	<script src="assets/d3/topojson.js"></script>
+	<script src="assets/d3/regions.js"></script>
+
+	<script>
+		d3.json('./data/input.json', function (error, treeData) {
+
+			var DURATION = 700; // d3 animation duration
+			var STAGGERN = 4; // delay for each node
+			var STAGGERD = 200; // delay for each depth
+			var NODE_DIAMETER = 4; // diameter of circular nodes
+			var MIN_ZOOM = 0.5; // minimum zoom allowed
+			var MAX_ZOOM = 10;  // maximum zoom allowed
+			var HAS_CHILDREN_COLOR = 'lightsteelblue';
+			var SELECTED_COLOR = '#a00';  // color of selected node
+			var ZOOM_INC = 0.04;  // zoom factor per animation frame
+			var PAN_INC = 3;  //  pan per animation frame
+			var ROT_INC = 0.3;  // rotation per animation frame
+
+			var counter = 0;  // node ids
+			var curNode;  // currently selected node
+			var curPath;  // array of nodes in the path to the currently selected node
+
+			// size of the diagram
+			var width = window.innerWidth - 20;
+			var height = window.innerHeight - 20;
+
+			// current pan, zoom, and rotation
+			var curX = width / 2;
+			var curY = height / 2;
+			var curZ = 1.0; // current zoom
+			var curR = 270; // current rotation
+
+			// keyboard key codes
+			var KEY_PLUS = 187;     // + (zoom in)
+			var KEY_MINUS = 189;    // - (zoom out)
+			var KEY_SLASH = 191;    // / (slash)
+			var KEY_PAGEUP = 33;    // (rotate CCW)
+			var KEY_PAGEDOWN = 34;  // (rotate CW)
+			var KEY_LEFT = 37;      // left arrow
+			var KEY_UP = 38;        // up arrow
+			var KEY_RIGHT = 39;     // right arrow
+			var KEY_DOWN = 40;      // down arrow
+			var KEY_SPACE = 32;     // (expand node)
+			var KEY_RETURN = 13;    // (expand tree)
+			var KEY_HOME = 36;      // (center root)
+			var KEY_END = 35;       // (center selection)
+
+			// tree size
+			var TOTAL_LEVEL = 5;
+			var MAX_LEVEL_TO_SHOW = 3;
+
+			// d3 diagonal projection for use by the node paths
+			var diagonal = d3.svg.diagonal.radial()
+				.projection(function (d) {
+					return [d.y, d.x / 180 * Math.PI];
+				});
+
+			// d3 tree layout
+			var tree = d3.layout.tree()
+				// .nodeSize([360, Math.min(width, height) / 2 - 120])
+				// .size([360, Math.min(width, height) / 2 - 120]) // [360, radius]
+				.size(getTreeSize())
+				.separation(function (a, b) {
+					return a.depth === 0 ? 1 : (a.parent === b.parent ? 1 : 1) / a.depth;
+				});
+
+			// define the svgBase, attaching a class for styling and the zoomListener
+			var svgBase = d3.select('#tree-container').append('svg')
+				.attr('width', width)
+				.attr('height', height)
+				.on('mousedown', mousedown);
+			var div = d3.select("body").append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
+			// Group which holds all nodes and manages pan, zoom, rotate
+			var svgGroup = svgBase.append('g')
+				.attr('transform', 'translate(' + curX + ',' + curY + ')');
+
+			d3.select(document) // set up document events
+				.on('wheel', wheel)  // zoom, rotate
+				.on('keydown', keydown)
+				.on('keyup', keyup);
+			d3.select(window).on('resize', resize);
+			d3.selectAll('.button')
+				.on('mousedown', tooldown)
+				.on('mouseup', toolup);
+			d3.select('#selection').on('mousedown', switchroot);
+			d3.select('#contextmenu').on('mouseup', menuSelection);
+
+			// Define the data root
+			var root = treeData;
+			root.x0 = curY;
+			root.y0 = 0;
+			selectNode(root); // current selected node
+
+			// Collapse all children of root's children before rendering
+			// if (root.children) {
+			//   root.children.forEach(function(child) {
+			//       collapseTree(child);
+			//   });
+			// }
+			update(root, true); // Layout the tree initially and center on the root node
+
+			function getNode(nodes, startLevel = 1, maxDepth = 3) {
+				return nodes.filter(node => node.level && node.level < startLevel + maxDepth);
+			}
+
+			function processTreeData(treeData) {
+				var arrChiphi = (treeData.children || []).map(child => child.size);
+				arrChiphi.sort((a, b) => b - a);
+				var minChiphi = arrChiphi[9] || 0;
+
+				(treeData.children || []).forEach(child => { // tree.getNodes() xóa children nếu empty
+					processTreeData(child);
+					if (root.level == 1 && child.level == 3 && child.size < minChiphi) child.isHighlight = false;
+					else child.isHighlight = true;
+				});
+			}
+
+			// update the tree
+			// source - source node of the update
+			// transition - whether to do a transition
+			function update(source, transition) {
+
+				// resize tree
+				tree.size(getTreeSize());
+
+				var duration = transition ?
+					(d3.event && d3.event.altKey ? DURATION * 4 : DURATION) : 0;
+
+				console.log('source', source);
+				console.log('root', root);
+				// Compute the new tree layout.
+				var startLevel = Number.parseInt(root.level);
+				var nodes = getNode( tree.nodes(root), startLevel, MAX_LEVEL_TO_SHOW );
+				var links = tree.links( getNode( tree.nodes(root), startLevel, MAX_LEVEL_TO_SHOW - 1 ) );
+				// console.log('nodes', nodes);
+				// console.log('links', links);
+
+				// process treeData
+				processTreeData(treeData);
+
+				// Update the view
+				svgGroup.transition().duration(duration)
+					.attr('transform',
+						'rotate(' + curR + ' ' + curX + ' ' + curY +
+						')translate(' + curX + ' ' + curY +
+						')scale(' + curZ + ')');
+
+				// Update the nodes…
+				var node = svgGroup.selectAll('g.node')
+					.data(nodes, function (d) {
+						return d.id || (d.id = ++counter);
+					});
+
+				// Enter any new nodes at the parent's previous position
+				var nodeEnter = node.enter().insert('g', ':first-child')
+					.attr('class', 'node')
+					.attr("class", function (d) { return "node level".concat(d.level) })
+					// .attr('transform', 'rotate(' + (source.x0 - 90) + ')translate(' + source.y0 + ')')
+					.attr("transform", function (d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y - 50) + ")"; })
+					.on('click', click).on('dblclick', dblclick).on('contextmenu', showContextMenu)
+					.on("mouseover", function (d) {
+						div.transition()
+							.duration(200)
+							.style("opacity", .9);
+						div.html(`<span class="name">${d.name}</span><span class="size">${d.size}</span>`)
+							.style("left", (d3.event.pageX) + "px")
+							.style("top", (d3.event.pageY - 28) + "px");
+					})
+					.on("mouseout", function (d) {
+						div.transition()
+							.duration(500)
+							.style("opacity", 0);
+					});
+				// .on('mousedown', suppress);
+				nodeEnter.append('circle')
+					.attr('r', function (d) { return d.size / 1000 })
+					.attr("class", function (d) { return d.type });
+
+				// // display label
+				// nodeEnter.append('text')
+				// 	.text(function(d) {
+				// 		if (d.level == 2) return d.title;
+				// 		else return null;
+				// 	});
+
+				var nodeRoot = svgGroup.selectAll('g.node.level1');
+				nodeRoot.append('circle')
+					.attr("class", "logo-inner");
+				nodeRoot.append("svg:image")
+					.attr("xlink:href", "https://static.wixstatic.com/media/9d8ed5_64b820680dbe4c408e41f203c994f8b5~mv2.png/v1/fill/w_1000,h_1017,al_c,usm_0.66_1.00_0.01/9d8ed5_64b820680dbe4c408e41f203c994f8b5~mv2.png")
+					.attr("width", 48)
+					.attr("class", "logo")
+
+					.attr("height", 48)
+					.attr("x", 0)
+					.attr("y", 0);
+				// update existing graph nodes
+
+				// Change the circle fill depending on whether it has children and is collapsed
+				node.select('circle')
+					.attr('r', function (d) { return d.size / 1000 })
+					.attr("class", function (d) { return d.type });
+
+				var nodeUpdate = node.transition().duration(duration)
+					.delay(transition ? function (d, i) {
+						return i * STAGGERN +
+							Math.abs(d.depth - curNode.depth) * STAGGERD;
+					} : 0)
+					.attr('transform', function (d) {
+						return 'rotate(' + (d.x - 90) + ')translate(' + d.y + ')';
+					});
+
+				nodeUpdate.select('circle')
+					.attr('r', function (d) { return d.size / 1000 });
+				// .style('fill', function(d) {
+				//   return d._children ? HAS_CHILDREN_COLOR : 'white';
+				// });
+
+				nodeUpdate.select('text')
+					.style('fill-opacity', 1);
+
+				// Transition exiting nodes to the parent's new position and remove
+				var nodeExit = node.exit().transition().duration(duration)
+					.delay(transition ? function (d, i) {
+						return i * STAGGERN;
+					} : 0)
+					.attr('transform', function () {
+						return 'rotate(' + (source.x - 90) + ')translate(' + source.y + ')';
+					}).remove();
+
+				nodeExit.select('circle').attr('r', 0);
+				nodeExit.select('text').style('fill-opacity', 0);
+
+				// Update the links…
+				var link = svgGroup.selectAll('path.link')
+					.data(links, function (d) {
+						return d.target.id;
+					});
+
+				// Enter any new links at the parent's previous position
+				link.enter().insert('path', 'g')
+					//.attr('class', 'link')
+					.attr('class', function (d) { return d.target.isHighlight ? 'link' : 'hideLink'; })
+					.attr('d', function () {
+						var o = {
+							x: source.x0,
+							y: source.y0
+						};
+						return diagonal({
+							source: o,
+							target: o
+						});
+					});
+
+				// Transition links to their new position
+				link.transition().duration(duration)
+					.delay(transition ? function (d, i) {
+						return i * STAGGERN +
+							Math.abs(d.source.depth - curNode.depth) * STAGGERD;
+						// Math.max(0, d.source.depth - curNode.depth) * STAGGERD;
+					} : 0)
+					.attr('d', diagonal);
+
+				// Transition exiting nodes to the parent's new position
+				link.exit().transition().duration(duration)
+					.attr('d', function () {
+						var o = {
+							x: source.x0,
+							y: source.y0
+						};
+						return diagonal({
+							source: o,
+							target: o
+						});
+					}).remove();
+
+				// Stash the old positions for transition
+				nodes.forEach(function (d) {
+					d.x0 = d.x;
+					d.y0 = d.y;
+				});
+				// var couplingParent1 = tree.nodes(root).filter(function (d) {
+				// 	return d['name'] === 'cluster1';
+				// })[0];
+				// var couplingChild1 = tree.nodes(root).filter(function (d) {
+				// 	return d['name'] === 'AgglomerativeCluster1';
+				// })[0];
+
+				// multiParents = [{
+				// 	parent: couplingParent1,
+				// 	child: couplingChild1
+				// }];
+
+				// multiParents.forEach(function (multiPair) {
+				// 	svgGroup.selectAll(".additionalParentLink").transition().duration(duration).remove();
+				// 	if (multiPair.child !== undefined) {
+				// 		svgGroup.append("path", "g")
+				// 			.attr("class", "additionalParentLink")
+				// 			.attr("d", function () {
+				// 				var oTarget = {
+				// 					x: multiPair.parent.x0,
+				// 					y: multiPair.parent.y0
+				// 				};
+				// 				var oSource = {
+				// 					x: multiPair.child.x0,
+				// 					y: multiPair.child.y0
+				// 				};
+				// 				/*if (multiPair.child.depth === multiPair.couplingParent1.depth) {
+				// 					return "M" + oSource.y + " " + oSource.x + " L" + (oTarget.y + ((Math.abs((oTarget.x - oSource.x))) * 0.25)) + " " + oTarget.x + " " + oTarget.y + " " + oTarget.x;
+				// 				}*/
+				// 				return diagonal({
+				// 					source: oSource,
+				// 					target: oTarget
+				// 				});
+				// 			});
+				// 	}
+				// });
+
+			} // end update
+
+			// Helper functions for collapsing and expanding nodes
+			
+			// Toggle expand / collapse
+			function outer(d){
+				console.log(d);
+				console.log(d.name);
+				console.log(d.children.name);
+			}
+			function toggle(d) {
+				if (d.children) {
+					d._children = d.children;
+					d.children = null;
+				} else if (d._children) {
+					d.children = d._children;
+					d._children = null;
+				}
+			}
+
+			function toggleTree(d) {
+				if (d.children) {
+					collapseTree(d);
+				} else {
+					expandTree(d);
+				}
+			}
+
+			function expand(d) {
+				if (d._children) {
+					d.children = d._children;
+					d._children = null;
+				}
+			}
+
+			// expand all children, whether expanded or collapsed
+			function expandTree(d) {
+				if (d._children) {
+					d.children = d._children;
+					d._children = null;
+				}
+				if (d.children) {
+					d.children.forEach(expandTree);
+				}
+			}
+
+			function collapse(d) {
+				if (d.children) {
+					d._children = d.children;
+					d.children = null;
+				}
+			}
+
+			// collapse all children
+			function collapseTree(d) {
+				if (d.children) {
+					d._children = d.children;
+					d.children = null;
+				}
+				if (d._children) {
+					d._children.forEach(collapseTree);
+				}
+			}
+
+			// expand one level of tree
+			function expand1Level(d) {
+				var q = [d]; // non-recursive
+				var cn;
+				var done = null;
+				while (q.length > 0) {
+					cn = q.shift();
+					if (done !== null && done < cn.depth) { return; }
+					if (cn._children) {
+						done = cn.depth;
+						cn.children = cn._children;
+						cn._children = null;
+						cn.children.forEach(collapse);
+					}
+					if (cn.children) { q = q.concat(cn.children); }
+				}
+				// no nodes to open
+			}
+
+			// highlight selected node
+			function selectNode(node) {
+				if (curNode) {
+					delete curNode.selected;
+				}
+				curNode = node;
+				curNode.selected = true;
+				curPath = []; // filled in by fullpath
+				d3.select('#selection').html(fullpath(node));
+			}
+
+			// for displaying full path of node in tree
+			function fullpath(d, idx) {
+				idx = idx || 0;
+				curPath.push(d);
+				return (d.parent ? fullpath(d.parent, curPath.length) : '') +
+					'/<span class="nodepath' + (d.name === root.name ? ' highlight' : '') +
+					'" data-sel="' + idx + '" title="Set Root to ' + d.name + '">' +
+					d.name + '</span>';
+			}
+
+			// d3 event handlers
+
+			function switchroot() {
+				d3.event.preventDefault();
+				var pathelms = document.querySelectorAll('#selection .nodepath');
+				for (var i = 0; i < pathelms.length; i++) {
+					pathelms[i].classList.remove('highlight');
+				}
+				var target = d3.event.target;
+				var node = curPath[+target.dataset.sel];
+				if (d3.event.shiftKey) {
+					if (curNode !== node) {
+						selectNode(node);
+					}
+				} else {
+					root = node;
+					target.classList.add('highlight');
+				}
+				update(root, true);
+			}
+
+			function getTreeSize() {
+				// total level trong TH cây con k đủ thông tin ở các level, ví dụ 1 bộ k có quy định (level 5) nào
+				var totalLevel = !tree ? TOTAL_LEVEL : Math.max(...tree.nodes(root).map(node => Number.parseInt(node.level)));
+
+				var rootLevel = Number.parseInt( root ? root.level || 1 : 1);
+				var totalLevelLeft = totalLevel - rootLevel + 1;
+				console.log('totalLevelLeft', totalLevelLeft);
+				// [360, radius]
+				return [360, Math.min(width, height) / (2 * MAX_LEVEL_TO_SHOW / totalLevelLeft)];
+			}
+
+			function resize() { // window resize
+				var oldwidth = width;
+				var oldheight = height;
+				width = window.innerWidth - 20;
+				height = window.innerHeight - 20;
+				// tree.size([360, Math.min(width, height) / 2 - 120]); // [360, radius]
+				// tree.size(getTreeSize()); // resize trong hàm update
+				svgBase.attr('width', width).attr('height', height);
+				curX += (width - oldwidth) / 2;
+				curY += (height - oldheight) / 2;
+				svgGroup.attr('transform', 'rotate(' + curR + ' ' + curX + ' ' + curY +
+					')translate(' + curX + ' ' + curY + ')scale(' + curZ + ')');
+				update(root);
+			}
+
+			function click(d) { // select node
+				if (d3.event.defaultPrevented || d === curNode) { return; } // suppressed
+				d3.event.preventDefault();
+				selectNode(d);
+				update(d);
+			}
+
+			function dblclick(d) {  // Toggle children of node
+				if (d3.event.defaultPrevented) { return; } // click suppressed
+				d3.event.preventDefault();
+				if (d3.event.shiftKey) {
+					expand1Level(d); // expand node by one level
+				} else {
+					toggle(d);
+				}
+				update(d, true);
+			}
+
+			function tooldown(d) {  // tool button pressed
+				d3.event.preventDefault();
+				d3.select(d3.event.target).on('mouseout', toolup);
+				var key = +d3.event.target.dataset.key;
+				keydown(Math.abs(key), key < 0 || d3.event.shiftKey);
+			}
+
+			function toolup() {  // tool button released
+				d3.event.preventDefault();
+				d3.select(d3.event.target).on('mouseout', null);
+				keyup(Math.abs(+d3.event.target.dataset.key));
+			}
+
+			// right click, show context menu and select this node
+			function showContextMenu(d) {
+				d3.event.preventDefault();
+				d3.selectAll('.expcol').text(d.children ? 'Collapse' : 'Expand');
+				d3.select('#contextmenu').style({
+					left: (d3.event.pageX + 3) + 'px',
+					top: (d3.event.pageY + 8) + 'px',
+					display: 'block'
+				});
+				d3.select(document).on('mouseup', hideContextMenu);
+				selectNode(d);
+				update(d);
+			}
+
+			function hideContextMenu() {
+				d3.select('#contextmenu').style('display', 'none');
+				d3.select(document).on('mouseup', null);
+			}
+
+			function menuSelection() {
+				d3.event.preventDefault();
+				var key = +d3.event.target.dataset.key;
+				keydown(Math.abs(key), key < 0 || d3.event.shiftKey);
+			}
+
+			var startposX, startposY; // initial position on mouse button down for pan
+
+			function mousedown() {  // pan
+				d3.event.preventDefault();
+				if (d3.event.which !== 1 || d3.event.ctrlKey) { return; } // ingore other mouse buttons
+				startposX = curX - d3.event.clientX;
+				startposY = curY - d3.event.clientY;
+				d3.select(document).on('mousemove', mousemove, true);
+				d3.select(document).on('mouseup', mouseup, true);
+			}
+
+			function mousemove() {
+				d3.event.preventDefault();
+				curX = startposX + d3.event.clientX;
+				curY = startposY + d3.event.clientY;
+				setview();
+			}
+
+			function mouseup() {
+				d3.select(document).on('mousemove', null);
+				d3.select(document).on('mouseup', null);
+			}
+
+			var keysdown = [];  // which keys are currently down
+			var moveX = 0, moveY = 0, moveZ = 0, moveR = 0; // animations
+			var aniRequest = null;
+
+			function wheel() {  // mousewheel
+				var dz, newZ;
+				var slow = d3.event.altKey ? 0.25 : 1;
+				if (d3.event.wheelDeltaY !== 0) {  // up-down
+					dz = Math.pow(1.2, d3.event.wheelDeltaY * 0.001 * slow);
+					newZ = limitZ(curZ * dz);
+					dz = newZ / curZ;
+					curZ = newZ;
+
+					curX -= (d3.event.clientX - curX) * (dz - 1);
+					curY -= (d3.event.clientY - curY) * (dz - 1);
+					setview();
+				}
+				if (d3.event.wheelDeltaX !== 0) {  // left-right
+					curR = limitR(curR + d3.event.wheelDeltaX * 0.01 * slow);
+					update(root);
+				}
+			}
+
+			// keyboard shortcuts
+			function keydown(key, shift) {
+				if (!key) {
+					key = d3.event.which;  // fake key
+					shift = d3.event.shiftKey;
+				}
+				var parch; // parent's children
+				var slow = d3.event.altKey ? 0.25 : 1;
+				if (keysdown.indexOf(key) >= 0) { return; } // defeat auto repeat
+				switch (key) {
+					case KEY_PLUS: // zoom in
+						moveZ = ZOOM_INC * slow;
+						break;
+					case KEY_MINUS: // zoom out
+						moveZ = -ZOOM_INC * slow;
+						break;
+					case KEY_SLASH: // toggle root to selection
+						root = root === curNode ? treeData : curNode;
+						update(root, true);
+						curPath = []; // filled in by fullpath
+						d3.select('#selection').html(fullpath(curNode));
+						return;
+					case KEY_PAGEUP: // rotate counterclockwise
+						moveR = -ROT_INC * slow;
+						break;
+					case KEY_PAGEDOWN: // zoom out
+						moveR = ROT_INC * slow; // rotate clockwise
+						break;
+					case KEY_LEFT: // left arrow
+						if (shift) { // move selection to parent
+							if (!curNode) {
+								selectNode(root);
+							} else if (curNode.parent) {
+								selectNode(curNode.parent);
+							}
+							update(curNode);
+							return;
+						}
+						moveX = -PAN_INC * slow;
+						break;
+					case KEY_UP: // up arrow
+						if (shift) { // move selection to previous child
+							if (!curNode) {
+								selectNode(root);
+							} else if (curNode.parent) {
+								parch = curNode.parent.children;
+								selectNode(parch[(parch.indexOf(curNode) +
+									parch.length - 1) % parch.length]);
+							}
+							update(curNode);
+							return;
+						}
+						moveY = -PAN_INC * slow;
+						break;
+					case KEY_RIGHT: // right arrow
+						if (shift) { // move selection to first/last child
+							if (!curNode) {
+								selectNode(root);
+							} else {
+								if (curNode.children) {
+									selectNode(curNode.children[d3.event.altKey ?
+										curNode.children.length - 1 : 0]);
+								}
+							}
+							update(curNode);
+							return;
+						}
+						moveX = PAN_INC * slow;
+						break;
+					case KEY_DOWN: // down arrow
+						if (shift) { // move selection to next child
+							if (!curNode) {
+								selectNode(root);
+							} else if (curNode.parent) {
+								parch = curNode.parent.children;
+								selectNode(parch[(parch.indexOf(curNode) + 1) % parch.length]);
+							}
+							update(curNode);
+							return;
+						}
+						moveY = PAN_INC * slow;
+						break;
+					case KEY_SPACE: // expand/collapse node
+						if (!curNode) {
+							selectNode(root);
+						}
+						toggle(curNode);
+						update(curNode, true);
+						return;
+					case KEY_RETURN: // expand/collapse tree
+						if (!curNode) {
+							selectNode(root);
+						}
+						if (shift) {
+							expandTree(curNode);
+						} else {
+							expand1Level(curNode);
+						}
+						update(curNode, true);
+						return;
+					case KEY_HOME: // reset transform
+						if (shift) {
+							root = treeData;
+						}
+						curX = width / 2;
+						curY = height / 2;
+						curR = limitR(90 - root.x);
+						curZ = 1;
+						update(root, true);
+						return;
+					case KEY_END: // zoom to selection
+						if (!curNode) { return; }
+						curX = width / 2 - curNode.y * curZ;
+						curY = height / 2;
+						curR = limitR(90 - curNode.x);
+						update(curNode, true);
+						return;
+					default: return;  // ignore other keys
+				} // break jumps to here
+				keysdown.push(key);
+				// start animation if anything happening
+				if (keysdown.length > 0 && aniRequest === null) {
+					aniRequest = requestAnimationFrame(frame);
+				}
+			}
+
+			function keyup(key) {
+				key = key || d3.event.which;
+				var pos = keysdown.indexOf(key);
+				if (pos < 0) { return; }
+
+				switch (key) {
+					case KEY_PLUS: // zoom out
+					case KEY_MINUS: // zoom in
+						moveZ = 0;
+						break;
+					case KEY_PAGEUP: // rotate CCW
+					case KEY_PAGEDOWN: // rotate CW
+						moveR = 0;
+						break;
+					case KEY_LEFT: // left arrow
+					case KEY_RIGHT: // right arrow
+						moveX = 0;
+						break;
+					case KEY_UP: // up arrow
+					case KEY_DOWN: // down arrow
+						moveY = 0;
+						break;
+				}
+				keysdown.splice(pos, 1);  // remove key
+				if (keysdown.length > 0 || aniRequest === null) { return; }
+				cancelAnimationFrame(aniRequest);
+				aniRequest = aniTime = null;
+			}
+
+			var aniTime = null;
+
+			// update animation frame
+			function frame(frametime) {
+				var diff = aniTime ? (frametime - aniTime) / 16 : 0;
+				aniTime = frametime;
+
+				var dz = Math.pow(1.2, diff * moveZ);
+				var newZ = limitZ(curZ * dz);
+				dz = newZ / curZ;
+				curZ = newZ;
+				curX += diff * moveX - (width / 2 - curX) * (dz - 1);
+				curY += diff * moveY - (height / 2 - curY) * (dz - 1);
+				curR = limitR(curR + diff * moveR);
+				setview();
+				aniRequest = requestAnimationFrame(frame);
+			}
+
+			// enforce zoom extent
+			function limitZ(z) {
+				return Math.max(Math.min(z, MAX_ZOOM), MIN_ZOOM);
+			}
+
+			// keep rotation between 0 and 360
+			function limitR(r) {
+				return (r + 360) % 360;
+			}
+
+			// limit size of text and nodes as scale increases
+			function reduceZ() {
+				return Math.pow(1.1, -curZ);
+			}
+
+			// set view with no animation
+			function setview() {
+				svgGroup.attr('transform', 'rotate(' + curR + ' ' + curX + ' ' + curY +
+					')translate(' + curX + ' ' + curY + ')scale(' + curZ + ')');
+				svgGroup.selectAll('text')
+					.attr('text-anchor', function (d) {
+						return (d.x + curR) % 360 <= 180 ? 'start' : 'end';
+					})
+					.attr('transform', function (d) {
+						return ((d.x + curR) % 360 <= 180 ?
+							'translate(8)scale(' :
+							'rotate(180)translate(-8)scale('
+						) + reduceZ() + ')';
+					});
+				svgGroup.selectAll('circle').attr('r', function (d) { return d.size / 1000 });
+			}
+
+
+		});
+
+	</script>
+
+
+</body>

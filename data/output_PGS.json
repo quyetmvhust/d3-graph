@@ -1,0 +1,1217 @@
+{
+  "name": "flare",
+  "level":1,
+  "size":0,
+  "children": [
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster1",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":1000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster1",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster1",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster2",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization1",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster1",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":5000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 6000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "level": 2,
+      "type": "bo",
+      "size":10000,
+      "children": [
+        {
+          "name": "cluster",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AgglomerativeCluster",
+              "level": 4,
+              "size": 3938,
+              "type": "diaphuong"
+            },
+            {
+              "name": "CommunityStructure",
+              "level": 4,
+              "size": 3812,
+              "type": "diaphuong"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "level": 4,
+              "size": 6714,
+              "type": "diaphuong"
+            },
+            {
+              "name": "MergeEdge",
+              "level": 4,
+              "size": 743,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "graph",
+          "level": 3,
+          "type": "nganh",
+          "size": 5000,
+          "children": [
+            {
+              "name": "BetweennessCentrality",
+              "level": 4,
+              "size": 3534,
+              "type": "diaphuong"
+            },
+            {
+              "name": "LinkDistance",
+              "level": 4,
+              "size": 5731,
+              "type": "diaphuong"
+              
+            },
+            {
+              "name": "MaxFlowMinCut",
+              "level": 4,
+              "size": 7840,
+              "type": "diaphuong"
+            },
+            {
+              "name": "ShortestPaths",
+              "level": 4,
+              "size": 5914,
+              "type": "diaphuong"
+            },
+            {
+              "name": "SpanningTree",
+              "level": 4,
+              "size": 3416,
+              "type": "diaphuong"
+            }
+          ]
+        },
+        {
+          "name": "optimization",
+          "level": 3,
+          "type": "bo",
+          "size": 5000,
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "level": 4,
+              "size": 7074,
+              "type": "diaphuong"
+            }
+          ]
+        }
+      ]
+    }
+    
+  ]
+}

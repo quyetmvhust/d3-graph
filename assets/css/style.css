@@ -1,0 +1,9 @@
+body {
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
