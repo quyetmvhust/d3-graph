@@ -173,7 +173,7 @@ var bindEventLink = function(){
         redrawVisualMap();
     });
 }
-//nghiand
+//nghiand 001
 var topicVisualization = new TopicVisualization();
 var dragging = null;
 var initForm = function() {
