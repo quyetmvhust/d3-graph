@@ -6218,6 +6218,7 @@ function addTextbox(nodeContainersEnter, nodeContainersMerge, nodeContainers, no
 }
 
 // Handle display of text by using a <div /> wrapped in a <foreignObject />
+// nghiand: cập nhật text hiển thị
 function addTextUsingForeignObject(textSelectionEnter, nodeContainersMerge, radius, nodeSpacingModifier, width, height, getTitleStringFromNode) {
   textSelectionEnter.append("xhtml:div");
   var foreignObjectMerge = nodeContainersMerge.selectAll("foreignObject.node-text");
@@ -6234,8 +6235,12 @@ function addTextUsingForeignObject(textSelectionEnter, nodeContainersMerge, radi
     var language = _ref9.language;
     return language;
   }).attr("title", getTitleStringFromNode).html(function (_ref10) {
-    var name = _ref10.name;
-    return name;
+    if(_ref10.depth == 0 || _ref10.depth == 1){
+      var name = _ref10.name;
+      return name;
+    } else {
+      return '';
+    }
   });
 
   // In Chrome 71, there's a bug that causes things with foreignObjects to not apply the
@@ -7699,6 +7704,10 @@ var TransformationMap = function () {
       return null;
     };
 
+    /*this._onMoveOverKeyIssue = function (node) {
+      return null;
+    };*/
+
     this._onSelectInsightArea = function (node) {
       return null;
     };
@@ -7954,7 +7963,12 @@ var TransformationMap = function () {
     value: function onSelectKeyIssue(_onSelectKeyIssue) {
       return setOrGetParameter(this, "_onSelectKeyIssue", _onSelectKeyIssue);
     }
-  }, {
+  }/*, {
+    key: "onMoveOverKeyIssue",
+    value: function onSelectKeyIssue(_onMoveOverKeyIssue) {
+      return setOrGetParameter(this, "_onMoveOverKeyIssue", _onMoveOverKeyIssue);
+    }
+  }*/, {
     key: "onSelectInsightArea",
     value: function onSelectInsightArea(_onSelectInsightArea) {
       return setOrGetParameter(this, "_onSelectInsightArea", _onSelectInsightArea);
@@ -8093,13 +8107,13 @@ var TransformationMap = function () {
       });
       var mapNodeContainerEnter = mapNodeContainer.enter().insert("g", ":first-child").classed("map-node", true);
       mapNodeContainer.exit().remove();
-
+      //nghiand: vẽ vòng tròn trong và ngoài
       // Create the 3 rings (from outer to inner, to accomodate for SVG rendering by layers):
       // 1. Insight Areas Ring
       createCircleNormal(radius, mapNodeContainerEnter, mapNodeContainer, this._mode, "insight-areas-circle", this._animationDuration);
       // 2. Key Issues Ring
       createCircleNormal(radius / dimensionRadiusDivisionFactor, mapNodeContainerEnter, mapNodeContainer, this._mode, "drop-target-container", this._animationDuration);
-
+      //end
       this._image.attr("xlink:href", nodesHead.image_url);
       setImageDimensions(this._image, radius * 1.33, this._animationDuration); // radius * 2.75 / 2.25
 
@@ -8217,8 +8231,8 @@ var TransformationMap = function () {
 
       // Create the circles for the Insight Area and Key Issue points
       // and actions to highlight the linked points on hovering over them
-
-      nodeContainersEnter.filter(function (_ref16) {
+      //nghiand
+      /*nodeContainersEnter.filter(function (_ref16) {
         var depth = _ref16.depth;
         return depth === 1;
       }).append("g").append("circle").attr("r", "14px").attr("class", function (_ref17) {
@@ -8238,12 +8252,37 @@ var TransformationMap = function () {
       }).attr("data-entity-type", function (_ref21) {
         var display_type = _ref21.display_type;
         return _this._getEntityType(display_type);
+      }).append("title");*/
+      //nghiand: cập nhật add node level 1 radius = 14px
+      nodeContainersEnter.filter(function (_ref19) {
+        var depth = _ref19.depth;
+        return depth === 1;
+      }).append("g").append("circle").attr("r", function(_ref){
+          return _ref.radius_item
+      }).attr("class", function (_ref17) {
+        var id = _ref17.id;
+        return "marker key-issue node-" + id;
+      }).attr("data-entity-type", function (_ref18) {
+        var display_type = _ref18.display_type;
+        return _this._getEntityType(display_type);
+      }).append("title");
+      //nghiand: cập nhật add node level 2 radius = 2px
+      nodeContainersEnter.filter(function (_ref19) {
+        var depth = _ref19.depth;
+        return depth === 2;
+      }).append("g").append("circle").attr("r", "2px").attr("class", function (_ref17) {
+        var id = _ref17.id;
+        return "marker key-issue node-" + id;
+      }).attr("data-entity-type", function (_ref18) {
+        var display_type = _ref18.display_type;
+        return _this._getEntityType(display_type);
       }).append("title");
 
       var getTitleStringFromNode = function getTitleStringFromNode(_ref22) {
-        var name = _ref22.name,
-            volume = _ref22.volume;
-        return volume !== null && volume !== undefined ? name + ": " + volume : name;
+        //var name = _ref22.name,
+        //    volume = _ref22.volume;
+        //return volume !== null && volume !== undefined ? name + ": " + volume : name;
+        return _ref22.fullname;
       };
 
       var innerNodeContainersMerge = nodeContainersMerge.select("g");
@@ -8270,7 +8309,8 @@ var TransformationMap = function () {
       // Key issue nodes can be drawn proportional to each other based on the dimension volumes
       // if they've been provided.
       // Default radius is 14px, but with volumes it ranges from 8-17px depending on the value.
-      var getDimensionRadius = function getDimensionRadius() {
+      //nghiand: cập nhật bỏ default
+      /*var getDimensionRadius = function getDimensionRadius() {
         return 14;
       };
       if (this._dimensionVolumeRange && this._dimensionVolumeRange.length) {
@@ -8286,7 +8326,7 @@ var TransformationMap = function () {
       }).select("circle").transition().duration(this._animationDuration).attr("r", function (_ref28) {
         var volume = _ref28.volume;
         return getDimensionRadius(volume) + "px";
-      });
+      });*/
 
       if (this._mode !== EDIT_MODE) {
         var previouslySelectedNode = null;
@@ -8385,6 +8425,10 @@ var TransformationMap = function () {
       nodeContainersMerge.selectAll(".node .key-issue.view, .node .node-text.view.key-issues").on("click", function (_, datum) {
         return _this._onSelectKeyIssue && _this._onSelectKeyIssue(datum);
       });
+
+      /*nodeContainersMerge.selectAll(".node .key-issue.view, .node .node-text.view.key-issues").on("mouseover", function (_, datum) {
+        return _this._onMoveOverKeyIssue && _this._onMoveOverKeyIssue(datum);
+      });*/
 
       // 3. Insight areas: select insight area callback
       nodeContainersMerge.selectAll(".node .insight-area, .node .node-text.view.insight-areas").on("click", function (_, datum) {
