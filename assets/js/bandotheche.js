@@ -173,7 +173,7 @@ var bindEventLink = function(){
         redrawVisualMap();
     });
 }
-
+//nghiand
 var topicVisualization = new TopicVisualization();
 var dragging = null;
 var initForm = function() {
